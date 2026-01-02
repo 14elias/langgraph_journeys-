@@ -15,7 +15,8 @@ load_dotenv()
 # This is the global variable to store document content
 document_content = ""
 
-os.environ("OPENAI_API_KEY") = os.getenv('API_KEY')
+os.environ["OPENAI_API_KEY"] = os.getenv('API_KEY')
+os.environ["OPENAI_BASE_URL"] = "https://openrouter.ai/api/v1"
 
 
 class AgentState(TypedDict):
@@ -39,14 +40,13 @@ def save_content(file_name: str) -> str:
 
     global document_content
 
-    if not file_name.endswith('.txt'):
-        filename = f'{file_name}.txt'
+    file_name = file_name if file_name.endswith(".txt") else f"{file_name}.txt"
     
     try:
-        with open(filename, 'w') as file:
+        with open(file_name, 'w') as file:
             file.write(document_content)
-        print(f"\n💾 Document has been saved to: {filename}")
-        return f"Document has been saved successfully to '{filename}'."
+        print(f"\n💾 Document has been saved to: {file_name}")
+        return f"Document has been saved successfully to '{file_name}'."
     
     except Exception as e:
         return f"Error saving document: {str(e)}"
