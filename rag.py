@@ -34,7 +34,7 @@ vector_store = Chroma.from_documents(
 )
 
 query = 'what is AIagent'
-result = vector_store.similarity_search(query='', k=2)
+result = vector_store.similarity_search(query=query, k=2)
 print(result[0].page_content)
 
 
